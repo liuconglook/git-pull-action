@@ -23,4 +23,5 @@ fi
 mkdir -p ~/.ssh
 cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 # 执行拉取代码的脚本
+chmod 700 /git-pull.sh
 sh -c "/git-pull.sh $*"

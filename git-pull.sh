@@ -25,4 +25,4 @@ mv index index.html
 git add index.html
 git commit index.html -m'update'
 # 提交更新
-git push origin master
+git push -f origin master

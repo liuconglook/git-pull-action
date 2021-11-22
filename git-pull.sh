@@ -11,6 +11,8 @@ GIT_SSH_COMMAND="ssh -v"
 echo "SOURCE=$SOURCE_REPO"
 echo "DESTINATION=$DESTINATION_REPO"
 
+git config --global user.name liucong
+git config --global user.email liuconglook@gmail.com
 # 克隆项目
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 # 添加源仓库

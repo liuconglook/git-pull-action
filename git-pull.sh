@@ -17,5 +17,7 @@ git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 git remote add dest "$SOURCE_REPO"
 # 更新代码
 git pull dest master
+# 忽略index文件
+git rm --cached index.html
 # 提交更新
 git push origin master

@@ -40,7 +40,7 @@ echo "mirror finish."
 cd ../
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 
-files=(${IGNORE_FILES//,/ })  
+files=(${IGNORE_FILES//,/ })
 for file in ${files[@]}
 do
    mv "../ignore/$file" "./$file"

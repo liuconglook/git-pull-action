@@ -41,13 +41,15 @@ echo "mirror finish."
 # 恢复忽略文件
 cd ../
 rm -r "$SOURCE_DIR"
+ls
 
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
+ls
 
 files=(${IGNORE_FILES//,/ })
 for file in ${files[@]}
 do
-   mv "/ignore/$file" "./$file"
+   mv "../ignore/$file" "./$file"
 done
 
 echo "reset ignore file finish."

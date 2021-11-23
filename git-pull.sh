@@ -10,7 +10,7 @@ SOURCE_DIR=$(basename "$SOURCE_REPO") # notes.git
 GIT_SSH_COMMAND="ssh -v"
 
 echo "SOURCE=$SOURCE_REPO"
-echo "DESTINATION=$DESTINATION_REPO""
+echo "DESTINATION=$DESTINATION_REPO"
 echo "IGNORE_FILES=$IGNORE_FILES"
 
 git config --global user.name liucong

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 任意语句执行的失败都会退出shell
 set -e
 # 创建ssh秘钥文件

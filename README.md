@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Sync to Gitee
-        uses: liuconglook/git-pull-action@master # wearerequired/git-mirror-action@v1.0.1
+        uses: liuconglook/git-pull-action@master
         env:
           # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
@@ -49,4 +49,3 @@ jobs:
           branch: master
 ~~~
 
-- 注：无法解决冲突问题，避免直接修改Gitee仓库，而是通过自动pull更新。如需镜像拷贝，更改为注释的wearerequired/git-mirror-action@v1.0.1即可

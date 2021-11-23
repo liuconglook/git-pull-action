@@ -28,6 +28,7 @@ echo "backups finish."
 
 # 镜像仓库
 cd ../
+ls
 git clone --mirror "$SOURCE_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 git remote set-url --push origin "$DESTINATION_REPO"
 git fetch -p origin
@@ -39,6 +40,7 @@ echo "mirror finish."
 
 # 恢复忽略文件
 cd ../
+ls
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 
 files=(${IGNORE_FILES//,/ })

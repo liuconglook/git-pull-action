@@ -46,7 +46,7 @@ git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
 files=(${IGNORE_FILES//,/ })
 for file in ${files[@]}
 do
-   cp "../ignore/$file" "./$file"
+   mv "/ignore/$file" "./$file"
 done
 
 echo "reset ignore file finish."

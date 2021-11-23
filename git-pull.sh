@@ -4,26 +4,52 @@ set -e
 
 SOURCE_REPO=$1 # 源仓库地址git@github.com:liuconglook/notes.git
 DESTINATION_REPO=$2 # 目标仓库地址
+IGNORE_FILES=$3 # 忽略文件列表
 SOURCE_DIR=$(basename "$SOURCE_REPO") # notes.git
 
 GIT_SSH_COMMAND="ssh -v"
 
 echo "SOURCE=$SOURCE_REPO"
-echo "DESTINATION=$DESTINATION_REPO"
+echo "DESTINATION=$DESTINATION_REPO""
+echo "IGNORE_FILES=$IGNORE_FILES"
 
 git config --global user.name liucong
 git config --global user.email liuconglook@gmail.com
-# 克隆项目
+
+# 拷贝忽略更新的文件
+git init ignore && cd ignore
+git config core.sparsecheckout true
+echo -e "${IGNORE_FILES//,/"\n"}" >> .git/info/sparse-checkout
+git remote add origin "$DESTINATION_REPO"
+git pull origin master
+
+echo "backups finish."
+
+# 镜像仓库
+cd ../
+git clone --mirror "$SOURCE_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
+git remote set-url --push origin "$DESTINATION_REPO"
+git fetch -p origin
+# Exclude refs created by GitHub for pull request.
+git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+git push --mirror
+
+echo "mirror finish."
+
+# 恢复忽略文件
+cd ../
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
-# 添加源仓库
-git remote add dest "$SOURCE_REPO"
-mv index.html index
-# 更新代码
-git pull dest master --rebase
-git pull origin master --rebase
-# 忽略index文件
-mv index index.html
-git add index.html
-git commit index.html -m'update'
-# 提交更新
-git push -f origin master
+
+files=(${IGNORE_FILES//,/ })  
+for file in ${files[@]}
+do
+   mv "../ignore/$file" "./$file"
+done
+
+echo "reset ignore file finish."
+
+git add -A
+git commit -am'update'
+git push origin master
+
+echo "finish."

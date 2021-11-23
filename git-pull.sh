@@ -22,6 +22,7 @@ git config core.sparsecheckout true
 echo -e "${IGNORE_FILES//,/"\n"}" >> .git/info/sparse-checkout
 git remote add origin "$DESTINATION_REPO"
 git pull origin master
+ls
 
 echo "backups finish."
 

@@ -20,6 +20,7 @@ git remote add dest "$SOURCE_REPO"
 mv index.html index
 # 更新代码
 git pull dest master --rebase
+git pull origin master --rebase
 # 忽略index文件
 mv index index.html
 git add index.html

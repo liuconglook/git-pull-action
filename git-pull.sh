@@ -22,7 +22,6 @@ git config core.sparsecheckout true
 echo -e "${IGNORE_FILES//,/"\n"}" >> .git/info/sparse-checkout
 git remote add origin "$DESTINATION_REPO"
 git pull origin master
-ls
 
 echo "backups finish."
 
@@ -41,10 +40,8 @@ echo "mirror finish."
 # 恢复忽略文件
 cd ../
 rm -r "$SOURCE_DIR"
-ls
 
 git clone "$DESTINATION_REPO" "$SOURCE_DIR" && cd "$SOURCE_DIR"
-ls
 
 files=(${IGNORE_FILES//,/ })
 for file in ${files[@]}
